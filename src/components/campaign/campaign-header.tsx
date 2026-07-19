@@ -60,7 +60,7 @@ export function CampaignHeader({
       <div className="mx-auto flex h-[60px] max-w-[1440px] items-center justify-between gap-5 px-4 sm:px-6 lg:h-[72px] lg:px-10">
         <Link
           href="/"
-          aria-label={homeLabel}
+          title={homeLabel}
           className="relative z-10 min-w-0 rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300"
           onClick={() => setMobileOpen(false)}
         >

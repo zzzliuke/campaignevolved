@@ -27,7 +27,8 @@ export function CampaignLogo({
     >
       <svg
         viewBox="0 0 48 48"
-        role="img"
+        role={showText ? undefined : 'img'}
+        aria-hidden={showText ? true : undefined}
         aria-label={showText ? undefined : text}
         className={cn('shrink-0', compact ? 'size-7' : 'size-9')}
       >

@@ -55,7 +55,7 @@ export function MissionCard({
           <span className="font-mono text-[0.65rem] tracking-[0.18em] text-cyan-300 uppercase">
             {missionNumber}
           </span>
-          <span className="text-[0.62rem] font-semibold tracking-[0.16em] text-white/43 uppercase">
+          <span className="text-[0.62rem] font-semibold tracking-[0.16em] text-white/55 uppercase">
             {phase}
           </span>
         </div>

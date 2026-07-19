@@ -41,14 +41,14 @@ export function ManualIndexCard({
       )}
     >
       <CampaignLink
-        action={{ href, label: title, ariaLabel: title }}
+        action={{ href, label: title }}
         className="flex h-full min-h-[290px] flex-col p-6 focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-current"
       >
         <div className="flex items-start justify-between gap-4">
           <span className="grid size-11 place-items-center border border-current/30 bg-current/5">
             <Icon className="size-5" aria-hidden="true" />
           </span>
-          <span className="font-mono text-xs tracking-[0.16em] text-white/34">
+          <span className="font-mono text-xs tracking-[0.16em] text-white/55">
             {index}
           </span>
         </div>
@@ -58,7 +58,7 @@ export function ManualIndexCard({
         <p className="mt-3 text-sm leading-6 text-white/58">{description}</p>
         <div className="mt-auto flex items-end justify-between gap-4 pt-8">
           {meta ? (
-            <span className="text-[0.62rem] font-semibold tracking-[0.14em] text-white/38 uppercase">
+            <span className="text-[0.62rem] font-semibold tracking-[0.14em] text-white/55 uppercase">
               {meta}
             </span>
           ) : (

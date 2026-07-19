@@ -45,12 +45,12 @@ export function CampaignFooter({
           <div>
             <Link
               href="/"
-              aria-label={homeLabel}
+              title={homeLabel}
               className="inline-flex focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300"
             >
               {brand ?? <CampaignLogo accent="amber" />}
             </Link>
-            <p className="mt-6 max-w-md text-sm leading-6 text-white/45">
+            <p className="mt-6 max-w-md text-sm leading-6 text-white/52">
               {disclaimer}
             </p>
             {sourceLinks && sourceLinks.length > 0 && (
@@ -59,7 +59,7 @@ export function CampaignFooter({
                   <CampaignLink
                     key={`${link.href}-${link.label}`}
                     action={link}
-                    className="text-[0.62rem] font-semibold tracking-[0.12em] text-white/42 uppercase transition hover:text-cyan-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300"
+                    className="text-[0.62rem] font-semibold tracking-[0.12em] text-white/55 uppercase transition hover:text-cyan-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300"
                   />
                 ))}
               </div>
@@ -77,7 +77,7 @@ export function CampaignFooter({
                     <li key={`${link.href}-${link.label}`}>
                       <CampaignLink
                         action={link}
-                        className="text-sm text-white/45 transition hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300"
+                        className="text-sm text-white/52 transition hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300"
                       />
                     </li>
                   ))}
@@ -88,7 +88,7 @@ export function CampaignFooter({
         </div>
 
         <div className="mt-14 flex flex-col gap-5 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-xs text-white/34">{copyright}</p>
+          <p className="text-xs text-white/52">{copyright}</p>
           {localeControl && (
             <div className="flex items-center">{localeControl}</div>
           )}
