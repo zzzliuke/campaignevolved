@@ -33,9 +33,10 @@ export const Route = createFileRoute('/blog/')({
         { rel: 'canonical', href: urlFor(locale ?? 'en') },
         ...locales.map((loc) => ({
           rel: 'alternate',
-          hrefLang: loc,
+          hrefLang: loc === 'zh' ? 'zh-CN' : 'en',
           href: urlFor(loc),
         })),
+        { rel: 'alternate', hrefLang: 'x-default', href: urlFor('en') },
       ],
     };
   },

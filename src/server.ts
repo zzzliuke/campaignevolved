@@ -23,6 +23,36 @@ function ensureCloudflareEnv(): Promise<void> {
   return cfEnvPromise;
 }
 
+function withSecurityHeaders(response: Response, secure: boolean): Response {
+  const headers = new Headers(response.headers);
+  headers.set('X-Content-Type-Options', 'nosniff');
+  headers.set('X-Frame-Options', 'DENY');
+  headers.set('X-XSS-Protection', '0');
+  headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
+  headers.set('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
+  headers.set(
+    'Permissions-Policy',
+    'accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(self), usb=()'
+  );
+
+  if (secure) {
+    headers.set(
+      'Strict-Transport-Security',
+      'max-age=63072000; includeSubDomains; preload'
+    );
+    headers.set(
+      'Content-Security-Policy',
+      "base-uri 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests"
+    );
+  }
+
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers,
+  });
+}
+
 // Custom server entry — wraps every request in Paraglide's middleware so
 // getLocale() resolves per-request (AsyncLocalStorage) during SSR.
 export default {
@@ -33,9 +63,10 @@ export default {
     if (url.hostname === 'www.campaignevolved.com') {
       url.hostname = 'campaignevolved.com';
       url.protocol = 'https:';
-      return Response.redirect(url, 308);
+      return withSecurityHeaders(Response.redirect(url, 308), true);
     }
 
-    return paraglideMiddleware(req, () => handler.fetch(req));
+    const response = await paraglideMiddleware(req, () => handler.fetch(req));
+    return withSecurityHeaders(response, url.protocol === 'https:');
   },
 };
