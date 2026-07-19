@@ -2,15 +2,15 @@ FROM node:22-alpine AS base
 
 # Install dependencies only when needed
 FROM base AS deps
-# Pin pnpm to v10 — v11 makes ignored-build-scripts fatal even when
-# `pnpm.onlyBuiltDependencies` is set in package.json, breaking CI install.
-RUN apk add --no-cache libc6-compat && npm install -g pnpm@10
+# Match the repository package manager so lockfile policy and build-script
+# allowlists behave identically in local, Cloudflare, and container builds.
+RUN apk add --no-cache libc6-compat && npm install -g pnpm@11.10.0
 
 WORKDIR /app
 
 # Copy package manifests, build config, and ALL dialect templates so the
 # postinstall hook can stamp out a matching schema.ts during install.
-COPY package.json pnpm-lock.yaml* vite.config.ts ./
+COPY package.json pnpm-lock.yaml* pnpm-workspace.yaml vite.config.ts ./
 COPY scripts/db-setup.mjs scripts/db-setup.mjs
 COPY src/config/db/schema.sqlite.ts src/config/db/schema.sqlite.ts
 COPY src/config/db/schema.postgres.ts src/config/db/schema.postgres.ts
@@ -31,6 +31,16 @@ WORKDIR /app
 
 # NODE_ENV=production so loadEnvFiles() in vite.config.ts reads .env.production
 ENV NODE_ENV=production
+ARG VITE_APP_URL=https://campaignevolved.com
+ARG VITE_APP_NAME="Campaign Evolved Manual"
+ARG VITE_APP_DESCRIPTION="Independent mission walkthroughs, campaign guides, arsenal references, enemy tactics, vehicles, co-op notes, and release information."
+ARG VITE_APP_LOGO=/logo.svg
+ARG VITE_DEFAULT_LOCALE=en
+ENV VITE_APP_URL=${VITE_APP_URL}
+ENV VITE_APP_NAME=${VITE_APP_NAME}
+ENV VITE_APP_DESCRIPTION=${VITE_APP_DESCRIPTION}
+ENV VITE_APP_LOGO=${VITE_APP_LOGO}
+ENV VITE_DEFAULT_LOCALE=${VITE_DEFAULT_LOCALE}
 
 COPY . .
 RUN pnpm build
