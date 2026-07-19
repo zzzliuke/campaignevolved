@@ -69,7 +69,7 @@ function MissionDetailPage() {
         description,
         url: missionUrl,
         mainEntityOfPage: missionUrl,
-        inLanguage: locale === 'zh' ? 'zh-CN' : 'en',
+        inLanguage: 'en',
         datePublished: '2026-07-19',
         dateModified: '2026-07-19',
         author: {

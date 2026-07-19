@@ -1,7 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 
 import { envConfigs } from '@/config';
-import { baseLocale, locales, localizeUrl } from '@/paraglide/runtime.js';
 
 const MISSION_SLUGS = [
   'the-pillar-of-autumn',
@@ -73,23 +72,14 @@ function escapeXml(value: string): string {
     .replaceAll("'", '&apos;');
 }
 
-function urlFor(path: string, locale: (typeof locales)[number]): string {
-  return localizeUrl(`${canonicalOrigin()}${path}`, { locale }).href;
+function urlFor(path: string): string {
+  return `${canonicalOrigin()}${path}`;
 }
 
 function entryXml(entry: SitemapEntry): string {
-  const alternates = locales.map(
-    (locale) =>
-      `    <xhtml:link rel="alternate" hreflang="${locale}" href="${escapeXml(urlFor(entry.path, locale))}" />`
-  );
-  alternates.push(
-    `    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(urlFor(entry.path, baseLocale))}" />`
-  );
-
   return [
     '  <url>',
-    `    <loc>${escapeXml(urlFor(entry.path, baseLocale))}</loc>`,
-    ...alternates,
+    `    <loc>${escapeXml(urlFor(entry.path))}</loc>`,
     `    <changefreq>${entry.changeFrequency}</changefreq>`,
     `    <priority>${entry.priority.toFixed(2)}</priority>`,
     '  </url>',
@@ -102,7 +92,7 @@ export const Route = createFileRoute('/sitemap.xml')({
       GET: () => {
         const xml = [
           '<?xml version="1.0" encoding="UTF-8"?>',
-          '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">',
+          '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
           ...STATIC_ENTRIES.map(entryXml),
           '</urlset>',
           '',

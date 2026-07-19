@@ -55,7 +55,6 @@ const getAnalyticsConfigs = createServerFn().handler(async () => {
 export const Route = createRootRoute({
   loader: () => getAnalyticsConfigs(),
   head: () => {
-    const locale = getLocale();
     const defaultTitle = `${envConfigs.app_name} – Missions, Walkthroughs & Guides`;
 
     // Canonical and alternate-language links belong to individual routes.
@@ -80,10 +79,7 @@ export const Route = createRootRoute({
         },
         { property: 'og:type', content: 'website' },
         { property: 'og:site_name', content: envConfigs.app_name },
-        {
-          property: 'og:locale',
-          content: locale === 'zh' ? 'zh_CN' : 'en_US',
-        },
+        { property: 'og:locale', content: 'en_US' },
         { property: 'og:title', content: defaultTitle },
         { property: 'og:description', content: envConfigs.app_description },
         { name: 'twitter:card', content: 'summary_large_image' },
@@ -152,21 +148,13 @@ function RootDocument({ children }: { children: ReactNode }) {
 }
 
 function NotFound() {
-  const isChinese = getLocale() === 'zh';
-  const copy = isChinese
-    ? {
-        eyebrow: '导航信号中断',
-        title: '未找到这个页面',
-        description: '坐标可能已变更，或该手册条目尚未发布。',
-        action: '返回首页',
-      }
-    : {
-        eyebrow: 'NAVIGATION SIGNAL LOST',
-        title: 'Page not found',
-        description:
-          'These coordinates may have changed, or this manual entry is not yet available.',
-        action: 'Return home',
-      };
+  const copy = {
+    eyebrow: 'NAVIGATION SIGNAL LOST',
+    title: 'Page not found',
+    description:
+      'These coordinates may have changed, or this manual entry is not yet available.',
+    action: 'Return home',
+  };
 
   return (
     <main
@@ -197,23 +185,14 @@ function NotFound() {
 }
 
 function RootError({ error, reset }: ErrorComponentProps) {
-  const isChinese = getLocale() === 'zh';
-  const copy = isChinese
-    ? {
-        eyebrow: '系统提示',
-        title: '页面暂时无法载入',
-        description: '手册系统遇到临时故障，请重试或返回首页。',
-        retry: '重新尝试',
-        home: '返回首页',
-      }
-    : {
-        eyebrow: 'SYSTEM NOTICE',
-        title: 'Unable to load this page',
-        description:
-          'The manual encountered a temporary fault. Try again or return home.',
-        retry: 'Try again',
-        home: 'Return home',
-      };
+  const copy = {
+    eyebrow: 'SYSTEM NOTICE',
+    title: 'Unable to load this page',
+    description:
+      'The manual encountered a temporary fault. Try again or return home.',
+    retry: 'Try again',
+    home: 'Return home',
+  };
 
   return (
     <main

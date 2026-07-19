@@ -2,7 +2,7 @@ import { createFileRoute } from '@tanstack/react-router';
 
 import { envConfigs } from '@/config';
 import { m } from '@/paraglide/messages.js';
-import { getLocale, locales, localizeUrl } from '@/paraglide/runtime.js';
+import { getLocale, localizeUrl } from '@/paraglide/runtime.js';
 import {
   FieldManualFeature,
   MissionPreparation,
@@ -33,7 +33,7 @@ function HomePage() {
       '@type': 'WebSite',
       name: 'Campaign Evolved Manual',
       url: `${baseUrl}/`,
-      inLanguage: locale === 'zh' ? 'zh-CN' : 'en',
+      inLanguage: 'en',
       description: m['campaign.seo.home.description']({}, messageOptions),
     },
     {
@@ -77,12 +77,11 @@ export const Route = createFileRoute('/')({
   loader: () => ({ locale: getLocale() }),
   head: ({ loaderData }) => {
     const locale = loaderData?.locale ?? 'en';
-    const options = { locale: locale as 'en' | 'zh' } as const;
+    const options = { locale } as const;
     const title = m['campaign.seo.home.title']({}, options);
     const description = m['campaign.seo.home.description']({}, options);
     const baseUrl = envConfigs.app_url.replace(/\/$/, '');
-    const urlFor = (targetLocale: string) =>
-      localizeUrl(`${baseUrl}/`, { locale: targetLocale as any }).href;
+    const canonicalUrl = localizeUrl(`${baseUrl}/`, { locale }).href;
     const image = `${baseUrl}/images/campaign/campaign-evolved-manual-og.webp`;
 
     return {
@@ -94,28 +93,17 @@ export const Route = createFileRoute('/')({
         { property: 'og:site_name', content: 'Campaign Evolved Manual' },
         { property: 'og:title', content: title },
         { property: 'og:description', content: description },
-        { property: 'og:url', content: urlFor(locale) },
+        { property: 'og:url', content: canonicalUrl },
         { property: 'og:image', content: image },
         { property: 'og:image:width', content: '1200' },
         { property: 'og:image:height', content: '630' },
-        {
-          property: 'og:locale',
-          content: locale === 'zh' ? 'zh_CN' : 'en_US',
-        },
+        { property: 'og:locale', content: 'en_US' },
         { name: 'twitter:card', content: 'summary_large_image' },
         { name: 'twitter:title', content: title },
         { name: 'twitter:description', content: description },
         { name: 'twitter:image', content: image },
       ],
-      links: [
-        { rel: 'canonical', href: urlFor(locale) },
-        ...locales.map((targetLocale) => ({
-          rel: 'alternate',
-          hrefLang: targetLocale === 'zh' ? 'zh-CN' : 'en',
-          href: urlFor(targetLocale),
-        })),
-        { rel: 'alternate', hrefLang: 'x-default', href: urlFor('en') },
-      ],
+      links: [{ rel: 'canonical', href: canonicalUrl }],
     };
   },
   component: HomePage,

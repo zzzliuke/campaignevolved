@@ -3,11 +3,11 @@ import { ArrowRight, ChevronRight } from 'lucide-react';
 
 import { Link } from '@/core/i18n/navigation';
 import { envConfigs } from '@/config';
-import { locales, localizeUrl } from '@/paraglide/runtime.js';
+import { localizeUrl } from '@/paraglide/runtime.js';
 import { Footer } from '@/blocks/footer';
 import { Header } from '@/blocks/header';
 
-export type CampaignLocale = 'en' | 'zh';
+export type CampaignLocale = 'en';
 
 export function campaignHead({
   locale,
@@ -23,8 +23,7 @@ export function campaignHead({
   article?: boolean;
 }) {
   const baseUrl = envConfigs.app_url.replace(/\/$/, '');
-  const urlFor = (targetLocale: string) =>
-    localizeUrl(`${baseUrl}${path}`, { locale: targetLocale as any }).href;
+  const canonicalUrl = localizeUrl(`${baseUrl}${path}`, { locale }).href;
   const image = `${baseUrl}/images/campaign/campaign-evolved-manual-og.webp`;
 
   return {
@@ -36,25 +35,17 @@ export function campaignHead({
       { property: 'og:site_name', content: envConfigs.app_name },
       { property: 'og:title', content: title },
       { property: 'og:description', content: description },
-      { property: 'og:url', content: urlFor(locale) },
+      { property: 'og:url', content: canonicalUrl },
       { property: 'og:image', content: image },
       { property: 'og:image:width', content: '1200' },
       { property: 'og:image:height', content: '630' },
-      { property: 'og:locale', content: locale === 'zh' ? 'zh_CN' : 'en_US' },
+      { property: 'og:locale', content: 'en_US' },
       { name: 'twitter:card', content: 'summary_large_image' },
       { name: 'twitter:title', content: title },
       { name: 'twitter:description', content: description },
       { name: 'twitter:image', content: image },
     ],
-    links: [
-      { rel: 'canonical', href: urlFor(locale) },
-      ...locales.map((targetLocale) => ({
-        rel: 'alternate',
-        hrefLang: targetLocale === 'zh' ? 'zh-CN' : 'en',
-        href: urlFor(targetLocale),
-      })),
-      { rel: 'alternate', hrefLang: 'x-default', href: urlFor('en') },
-    ],
+    links: [{ rel: 'canonical', href: canonicalUrl }],
   };
 }
 

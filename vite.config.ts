@@ -68,33 +68,9 @@ export default defineConfig({
       outdir: './src/paraglide',
       outputStructure: 'message-modules',
       cookieName: 'PARAGLIDE_LOCALE',
-      strategy: ['url', 'cookie', 'baseLocale'],
-      urlPatterns: [
-        // API endpoints are never locale-prefixed.
-        {
-          pattern: '/api/:path(.*)?',
-          localized: [
-            ['en', '/api/:path(.*)?'],
-            ['zh', '/api/:path(.*)?'],
-          ],
-        },
-        // Bare locale homes match without a trailing-slash redirect.
-        {
-          pattern: '/',
-          localized: [
-            ['zh', '/zh'],
-            ['en', '/'],
-          ],
-        },
-        // "as-needed" prefix: zh under /zh, en (default) unprefixed.
-        {
-          pattern: '/:path(.*)?',
-          localized: [
-            ['zh', '/zh/:path(.*)?'],
-            ['en', '/:path(.*)?'],
-          ],
-        },
-      ],
+      // English-only launch. Translation sources remain in the repository so
+      // URL/cookie strategies can be restored when internationalization ships.
+      strategy: ['baseLocale'],
     }),
     tanstackStart({
       srcDirectory: 'src',

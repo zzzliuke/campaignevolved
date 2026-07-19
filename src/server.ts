@@ -60,9 +60,16 @@ export default {
     await ensureCloudflareEnv();
 
     const url = new URL(req.url);
-    if (url.hostname === 'www.campaignevolved.com') {
+    const legacyChinesePath =
+      url.pathname === '/zh' || url.pathname.startsWith('/zh/');
+
+    if (url.hostname === 'www.campaignevolved.com' || legacyChinesePath) {
       url.hostname = 'campaignevolved.com';
       url.protocol = 'https:';
+      url.port = '';
+      if (legacyChinesePath) {
+        url.pathname = url.pathname === '/zh' ? '/' : url.pathname.slice(3);
+      }
       return withSecurityHeaders(Response.redirect(url, 308), true);
     }
 

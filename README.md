@@ -1,6 +1,6 @@
 # Campaign Evolved Manual
 
-Production codebase for [campaignevolved.com](https://campaignevolved.com), an independent bilingual campaign manual with mission walkthroughs, arsenal references, enemy tactics, vehicle notes, co-op guidance, release updates, and spoiler-aware editorial content.
+Production codebase for [campaignevolved.com](https://campaignevolved.com), an independent English-language campaign manual with mission walkthroughs, arsenal references, enemy tactics, vehicle notes, co-op guidance, release updates, and spoiler-aware editorial content.
 
 The public site is built on the ShipAny Next SaaS engine. Authentication, subscriptions, payments, credits, API keys, RBAC, CMS, administration, internationalization, email, storage, and multi-database support remain available behind the content experience.
 
@@ -17,7 +17,7 @@ pnpm dev
 
 Set a strong local `AUTH_SECRET` in `.env.development`. Local SQLite data is written to `data/` and is ignored by Git.
 
-The English base locale uses unprefixed routes. Simplified Chinese uses `/zh`, for example `/missions` and `/zh/missions`.
+The production site currently exposes English only on unprefixed routes. Legacy `/zh` URLs permanently redirect to their English equivalents. Chinese translation sources remain in the repository for a future internationalized release but are not compiled into the current site.
 
 ## Quality checks
 
@@ -35,7 +35,8 @@ Run the repository `security-scan` skill before every commit. Run `launch-audit 
 - `src/routes/` — public manual pages, SaaS pages, and API endpoints
 - `src/blocks/` — localized page sections
 - `src/components/campaign/` — prop-driven public-site components
-- `messages/en.json` and `messages/zh.json` — flat Paraglide message sources
+- `messages/en.json` — active flat Paraglide message source
+- `messages/zh.json` — retained future internationalization source (inactive)
 - `public/images/campaign/` — optimized original campaign artwork
 - `docs/research/` — reference analysis, topology, behavior, and component specs
 - `docs/ASSET_PROVENANCE.md` — generated-asset provenance and optimization record
@@ -84,7 +85,8 @@ Required production secrets include `AUTH_SECRET` and `CONFIG_ENCRYPTION_KEY`.
 
 - The homepage title begins with `Campaign Evolved Manual`.
 - Canonical production origin is `https://campaignevolved.com`.
-- Every public editorial route defines localized title, description, canonical, Open Graph, Twitter Card, and hreflang metadata.
+- Every public editorial route defines an English title, description, canonical, Open Graph, and Twitter Card metadata.
+- Legacy Chinese URLs redirect permanently to their canonical English equivalents and are excluded from Sitemap metadata.
 - `/sitemap.xml` and `/robots.txt` are server routes and must never emit preview or localhost origins in production.
 
 ## Legal position
