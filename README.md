@@ -61,10 +61,9 @@ Cloudflare production uses D1 by default. PostgreSQL through Hyperdrive remains 
 
 ## Cloudflare deployment
 
-1. Copy `wrangler.example.jsonc` to the ignored `wrangler.jsonc`.
-2. Set the production Worker name, D1 database binding, compatibility date, and custom-domain routes.
-3. Configure secrets with Wrangler; never commit them.
-4. Build and deploy:
+Production resource metadata and custom-domain routes are committed in `wrangler.jsonc`; secrets are stored only as encrypted Cloudflare Worker secrets. Cloudflare Workers Builds watches `main`, runs `pnpm cf:build`, and deploys with `npx wrangler deploy` after every push.
+
+For a manual deployment:
 
 ```bash
 pnpm cf:build
