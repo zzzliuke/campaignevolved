@@ -1,0 +1,29 @@
+{
+  "id": "/",
+  "name": "Campaign Evolved Manual",
+  "short_name": "CE Manual",
+  "description": "Independent Campaign Evolved mission walkthroughs, combat guides, arsenal references, enemy intel, and vehicle field manuals.",
+  "lang": "en",
+  "dir": "ltr",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#071014",
+  "theme_color": "#071014",
+  "categories": ["games", "education", "reference"],
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

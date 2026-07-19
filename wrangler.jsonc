@@ -1,0 +1,36 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "campaignevolved",
+  "compatibility_date": "2026-07-19",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "routes": [
+    {
+      "pattern": "campaignevolved.com",
+      "custom_domain": true,
+    },
+    {
+      "pattern": "www.campaignevolved.com",
+      "custom_domain": true,
+    },
+  ],
+  "observability": {
+    "enabled": true,
+  },
+  "vars": {
+    "DATABASE_PROVIDER": "d1",
+    "VITE_APP_URL": "https://campaignevolved.com",
+    "VITE_APP_NAME": "Campaign Evolved Manual",
+    "VITE_APP_DESCRIPTION": "Independent mission walkthroughs, campaign guides, arsenal references, enemy tactics, vehicles, co-op notes, and release information.",
+    "VITE_APP_LOGO": "/logo.svg",
+    "VITE_DEFAULT_LOCALE": "en",
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "campaignevolved-db",
+      "database_id": "565b195b-2a67-4a64-8d31-61a418bac2fb",
+      "migrations_dir": "drizzle",
+    },
+  ],
+}
