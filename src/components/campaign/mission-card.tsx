@@ -83,7 +83,7 @@ export function MissionCard({
               label: actionLabel,
               ariaLabel: `${actionLabel}: ${title}`,
             }}
-            className="inline-flex items-center gap-2 self-start text-[0.65rem] font-bold tracking-[0.14em] text-cyan-300 uppercase transition hover:text-cyan-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300 sm:self-auto"
+            className="inline-flex min-h-10 items-center gap-2 self-start py-2 text-[0.65rem] font-bold tracking-[0.14em] text-cyan-300 uppercase transition hover:text-cyan-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300 sm:self-auto"
           >
             {actionLabel}
             <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />

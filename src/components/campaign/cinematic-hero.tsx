@@ -113,7 +113,7 @@ export function CinematicHero({
       {scrollLabel && (
         <a
           href={scrollHref}
-          className="absolute right-6 bottom-8 hidden items-center gap-2 text-[0.6rem] tracking-[0.22em] text-white/54 uppercase transition hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-200 md:flex lg:right-12"
+          className="absolute right-6 bottom-8 hidden min-h-10 items-center gap-2 py-2 text-[0.6rem] tracking-[0.22em] text-white/54 uppercase transition hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-200 md:flex lg:right-12"
         >
           {scrollLabel}
           <ArrowDown className="size-4 animate-bounce motion-reduce:animate-none" />

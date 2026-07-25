@@ -61,7 +61,7 @@ export function CampaignHeader({
         <Link
           href="/"
           title={homeLabel}
-          className="relative z-10 min-w-0 rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300"
+          className="relative z-10 flex min-h-10 min-w-0 items-center rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300"
           onClick={() => setMobileOpen(false)}
         >
           {brand ?? <CampaignLogo />}

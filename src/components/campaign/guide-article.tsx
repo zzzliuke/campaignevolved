@@ -45,7 +45,7 @@ export function GuideArticle({
           <li key={item.id}>
             <a
               href={`#${item.id}`}
-              className="grid grid-cols-[24px_1fr] gap-2 border-l border-transparent py-1.5 pl-3 text-sm leading-5 text-white/50 transition hover:border-cyan-300 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300"
+              className="grid min-h-10 grid-cols-[24px_1fr] items-center gap-2 border-l border-transparent py-2 pl-3 text-sm leading-5 text-white/50 transition hover:border-cyan-300 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300"
             >
               <span className="font-mono text-[0.62rem] text-white/28">
                 {String(index + 1).padStart(2, '0')}

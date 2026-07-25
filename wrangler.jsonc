@@ -24,6 +24,7 @@
     "VITE_APP_DESCRIPTION": "Independent mission walkthroughs, campaign guides, arsenal references, enemy tactics, vehicles, co-op notes, and release information.",
     "VITE_APP_LOGO": "/logo.svg",
     "VITE_DEFAULT_LOCALE": "en",
+    "VITE_GOOGLE_ANALYTICS_ID": "G-SJMM830CKD",
   },
   "d1_databases": [
     {

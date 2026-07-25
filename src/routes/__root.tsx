@@ -19,7 +19,6 @@ import { getLocale } from '@/paraglide/runtime.js';
 import { GoogleAnalytics } from '@/components/analytics/google-analytics';
 import { Plausible } from '@/components/analytics/plausible';
 import { CustomerService } from '@/components/customer-service';
-import { GoogleOneTap } from '@/components/google-one-tap';
 import { Toaster } from '@/components/ui/sonner';
 
 import '@fontsource-variable/inter';
@@ -34,7 +33,9 @@ const getAnalyticsConfigs = createServerFn().handler(async () => {
   const { getAllConfigs } = await import('@/modules/config/service');
   const configs = await getAllConfigs();
   return {
-    gaId: configs.google_analytics_id?.trim() || '',
+    gaId:
+      configs.google_analytics_id?.trim() ||
+      envConfigs.google_analytics_id.trim(),
     plausibleDomain: configs.plausible_domain?.trim() || '',
     plausibleSrc: configs.plausible_src?.trim() || '',
     crispWebsiteId:
@@ -112,7 +113,6 @@ function RootComponent() {
       >
         <Outlet />
         <Toaster position="top-center" richColors />
-        <GoogleOneTap />
         {analytics?.gaId ? (
           <GoogleAnalytics measurementId={analytics.gaId} />
         ) : null}

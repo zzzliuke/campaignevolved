@@ -51,7 +51,7 @@ export function ManualPageShell({
                     {item.href && !current ? (
                       <Link
                         href={item.href}
-                        className="transition hover:text-cyan-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300"
+                        className="inline-flex min-h-10 items-center py-2 transition hover:text-cyan-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300"
                       >
                         {item.label}
                       </Link>

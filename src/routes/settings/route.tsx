@@ -16,6 +16,12 @@ import { SupportWidget } from '@/blocks/support-widget';
 import { AppLayout } from '@/components/app-layout';
 
 export const Route = createFileRoute('/settings')({
+  head: () => ({
+    meta: [
+      { name: 'robots', content: 'noindex, nofollow, noarchive' },
+      { name: 'googlebot', content: 'noindex, nofollow, noarchive' },
+    ],
+  }),
   component: SettingsLayout,
 });
 

@@ -5,6 +5,7 @@ export * from './cinematic-feature';
 export * from './cinematic-hero';
 export * from './guide-article';
 export * from './intel-card';
+export * from './lite-youtube-embed';
 export * from './manual-index-card';
 export * from './manual-page-shell';
 export * from './mission-card';

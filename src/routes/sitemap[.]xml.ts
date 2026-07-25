@@ -2,22 +2,6 @@ import { createFileRoute } from '@tanstack/react-router';
 
 import { envConfigs } from '@/config';
 
-const MISSION_SLUGS = [
-  'the-pillar-of-autumn',
-  'halo',
-  'truth-and-reconciliation',
-  'the-silent-cartographer',
-  'assault-on-the-control-room',
-  '343-guilty-spark',
-  'the-library',
-  'two-betrayals',
-  'keyes',
-  'the-maw',
-  'meteor-incursion',
-  'meteor-breakpoint',
-  'meteor-extraction',
-] as const;
-
 type ChangeFrequency =
   | 'always'
   | 'hourly'
@@ -31,25 +15,90 @@ type SitemapEntry = {
   path: string;
   changeFrequency: ChangeFrequency;
   priority: number;
+  lastModified: string;
 };
 
+const LAST_CONTENT_REVIEW = '2026-07-25';
+
 const STATIC_ENTRIES: SitemapEntry[] = [
-  { path: '/', changeFrequency: 'weekly', priority: 1 },
-  { path: '/missions', changeFrequency: 'weekly', priority: 0.95 },
-  ...MISSION_SLUGS.map((slug) => ({
-    path: `/missions/${slug}`,
-    changeFrequency: 'monthly' as const,
-    priority: 0.8,
-  })),
-  { path: '/arsenal', changeFrequency: 'monthly', priority: 0.85 },
-  { path: '/enemies', changeFrequency: 'monthly', priority: 0.85 },
-  { path: '/vehicles', changeFrequency: 'monthly', priority: 0.85 },
-  { path: '/guides', changeFrequency: 'weekly', priority: 0.9 },
-  { path: '/news', changeFrequency: 'weekly', priority: 0.75 },
-  { path: '/about', changeFrequency: 'yearly', priority: 0.5 },
-  { path: '/disclaimer', changeFrequency: 'yearly', priority: 0.4 },
-  { path: '/privacy-policy', changeFrequency: 'yearly', priority: 0.3 },
-  { path: '/terms-of-service', changeFrequency: 'yearly', priority: 0.3 },
+  {
+    path: '/',
+    changeFrequency: 'weekly',
+    priority: 1,
+    lastModified: LAST_CONTENT_REVIEW,
+  },
+  {
+    path: '/gameplay',
+    changeFrequency: 'weekly',
+    priority: 0.95,
+    lastModified: LAST_CONTENT_REVIEW,
+  },
+  {
+    path: '/missions',
+    changeFrequency: 'weekly',
+    priority: 0.95,
+    lastModified: LAST_CONTENT_REVIEW,
+  },
+  {
+    path: '/arsenal',
+    changeFrequency: 'monthly',
+    priority: 0.85,
+    lastModified: LAST_CONTENT_REVIEW,
+  },
+  {
+    path: '/enemies',
+    changeFrequency: 'monthly',
+    priority: 0.85,
+    lastModified: LAST_CONTENT_REVIEW,
+  },
+  {
+    path: '/vehicles',
+    changeFrequency: 'monthly',
+    priority: 0.85,
+    lastModified: LAST_CONTENT_REVIEW,
+  },
+  {
+    path: '/guides',
+    changeFrequency: 'weekly',
+    priority: 0.9,
+    lastModified: LAST_CONTENT_REVIEW,
+  },
+  {
+    path: '/videos',
+    changeFrequency: 'weekly',
+    priority: 0.85,
+    lastModified: LAST_CONTENT_REVIEW,
+  },
+  {
+    path: '/news',
+    changeFrequency: 'weekly',
+    priority: 0.75,
+    lastModified: LAST_CONTENT_REVIEW,
+  },
+  {
+    path: '/about',
+    changeFrequency: 'yearly',
+    priority: 0.5,
+    lastModified: LAST_CONTENT_REVIEW,
+  },
+  {
+    path: '/disclaimer',
+    changeFrequency: 'yearly',
+    priority: 0.4,
+    lastModified: LAST_CONTENT_REVIEW,
+  },
+  {
+    path: '/privacy-policy',
+    changeFrequency: 'yearly',
+    priority: 0.3,
+    lastModified: LAST_CONTENT_REVIEW,
+  },
+  {
+    path: '/terms-of-service',
+    changeFrequency: 'yearly',
+    priority: 0.3,
+    lastModified: LAST_CONTENT_REVIEW,
+  },
 ];
 
 function canonicalOrigin(): string {
@@ -80,6 +129,7 @@ function entryXml(entry: SitemapEntry): string {
   return [
     '  <url>',
     `    <loc>${escapeXml(urlFor(entry.path))}</loc>`,
+    `    <lastmod>${entry.lastModified}</lastmod>`,
     `    <changefreq>${entry.changeFrequency}</changefreq>`,
     `    <priority>${entry.priority.toFixed(2)}</priority>`,
     '  </url>',

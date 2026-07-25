@@ -46,7 +46,7 @@ export function CampaignFooter({
             <Link
               href="/"
               title={homeLabel}
-              className="inline-flex focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300"
+              className="inline-flex min-h-10 items-center focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300"
             >
               {brand ?? <CampaignLogo accent="amber" />}
             </Link>
@@ -59,7 +59,7 @@ export function CampaignFooter({
                   <CampaignLink
                     key={`${link.href}-${link.label}`}
                     action={link}
-                    className="text-[0.62rem] font-semibold tracking-[0.12em] text-white/55 uppercase transition hover:text-cyan-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300"
+                    className="inline-flex min-h-10 items-center py-2 text-[0.62rem] font-semibold tracking-[0.12em] text-white/55 uppercase transition hover:text-cyan-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300"
                   />
                 ))}
               </div>
@@ -77,7 +77,7 @@ export function CampaignFooter({
                     <li key={`${link.href}-${link.label}`}>
                       <CampaignLink
                         action={link}
-                        className="text-sm text-white/52 transition hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300"
+                        className="inline-flex min-h-10 items-center py-2 text-sm text-white/52 transition hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300"
                       />
                     </li>
                   ))}

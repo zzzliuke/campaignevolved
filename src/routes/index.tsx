@@ -10,10 +10,12 @@ import {
 import { CAMPAIGN_FAQ_KEYS, FAQ } from '@/blocks/faq';
 import { Features } from '@/blocks/features';
 import { Footer } from '@/blocks/footer';
+import { GameplayHub } from '@/blocks/gameplay-hub';
 import { Header } from '@/blocks/header';
 import { Hero } from '@/blocks/hero';
 import { IntelSystems } from '@/blocks/intel-systems';
 import { MissionDossiers } from '@/blocks/mission-dossiers';
+import { VideoShowcase } from '@/blocks/video-showcase';
 
 function HomePage() {
   const { locale } = Route.useLoaderData();
@@ -56,9 +58,11 @@ function HomePage() {
       <main id="main-content">
         <Hero />
         <Features />
+        <GameplayHub />
         <MissionDossiers />
         <MissionPreparation />
         <IntelSystems />
+        <VideoShowcase />
         <FieldManualFeature />
         <FAQ />
       </main>
@@ -88,7 +92,11 @@ export const Route = createFileRoute('/')({
       meta: [
         { title },
         { name: 'description', content: description },
-        { name: 'robots', content: 'index, follow, max-image-preview:large' },
+        {
+          name: 'robots',
+          content:
+            'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
+        },
         { property: 'og:type', content: 'website' },
         { property: 'og:site_name', content: 'Campaign Evolved Manual' },
         { property: 'og:title', content: title },

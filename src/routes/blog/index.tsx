@@ -29,6 +29,7 @@ export const Route = createFileRoute('/blog/')({
           name: 'description',
           content: m['blog.description']({}, { locale: locale ?? 'en' }),
         },
+        { name: 'robots', content: 'noindex, nofollow, noarchive' },
       ],
       links: [{ rel: 'canonical', href: canonicalUrl }],
     };

@@ -50,10 +50,24 @@ export function staticPageRouteOptions(slug: string) {
       const canonicalUrl = localizeUrl(`${envConfigs.app_url}/${slug}`, {
         locale: locale as ReturnType<typeof getLocale>,
       }).href;
+      const socialImage = `${envConfigs.app_url}/images/campaign/campaign-evolved-manual-og.webp`;
       return {
         meta: [
           { title: meta.title },
           { name: 'description', content: meta.description },
+          {
+            name: 'robots',
+            content: 'index, follow, max-image-preview:large',
+          },
+          { property: 'og:type', content: 'website' },
+          { property: 'og:title', content: meta.title },
+          { property: 'og:description', content: meta.description },
+          { property: 'og:url', content: canonicalUrl },
+          { property: 'og:image', content: socialImage },
+          { name: 'twitter:card', content: 'summary_large_image' },
+          { name: 'twitter:title', content: meta.title },
+          { name: 'twitter:description', content: meta.description },
+          { name: 'twitter:image', content: socialImage },
         ],
         links: [{ rel: 'canonical', href: canonicalUrl }],
       };

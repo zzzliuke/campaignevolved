@@ -19,6 +19,7 @@ export const envConfigs: Record<string, string> = {
   app_name: publicEnv('VITE_APP_NAME') ?? 'ShipAny',
   app_description: publicEnv('VITE_APP_DESCRIPTION') ?? 'Ship your SaaS faster',
   app_logo: publicEnv('VITE_APP_LOGO') ?? '/logo.svg',
+  google_analytics_id: publicEnv('VITE_GOOGLE_ANALYTICS_ID') ?? '',
 
   // Database
   database_url: procEnv.DATABASE_URL ?? '',

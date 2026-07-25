@@ -53,7 +53,9 @@ export function CampaignPage({ children }: { children: ReactNode }) {
   return (
     <div className="bg-background text-foreground flex min-h-screen flex-col">
       <Header />
-      <main className="flex-1">{children}</main>
+      <main id="main-content" className="flex-1 pt-[60px] lg:pt-[72px]">
+        {children}
+      </main>
       <Footer />
     </div>
   );
@@ -160,7 +162,7 @@ export function EditorialCard({
       {href && linkLabel ? (
         <Link
           href={href}
-          className="text-primary mt-5 inline-flex items-center gap-1.5 text-sm font-semibold underline-offset-4 hover:underline"
+          className="text-primary mt-5 inline-flex min-h-10 items-center gap-1.5 py-2 text-sm font-semibold underline-offset-4 hover:underline"
         >
           {linkLabel}
           <ArrowRight className="size-4" aria-hidden="true" />
@@ -189,7 +191,10 @@ export function Breadcrumbs({
               <ChevronRight className="size-3.5" aria-hidden="true" />
             ) : null}
             {item.href ? (
-              <Link href={item.href} className="hover:text-foreground">
+              <Link
+                href={item.href}
+                className="hover:text-foreground inline-flex min-h-10 items-center py-2"
+              >
                 {item.label}
               </Link>
             ) : (

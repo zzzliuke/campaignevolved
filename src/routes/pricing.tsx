@@ -19,8 +19,9 @@ export const Route = createFileRoute('/pricing')({
       ? [
           { title: loaderData.title },
           { name: 'description', content: loaderData.description },
+          { name: 'robots', content: 'noindex, nofollow, noarchive' },
         ]
-      : [],
+      : [{ name: 'robots', content: 'noindex, nofollow, noarchive' }],
   }),
   component: PricingPage,
 });
